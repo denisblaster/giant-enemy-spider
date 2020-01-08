@@ -1,0 +1,163 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Villkor_Loopar
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            string InputFromTextBox = textBox1.Text;
+
+           MoreErrors(textBox1.Text);
+           WhatIsErrors(textBox1.Text);
+           // ReadFile(0);
+            //LearningAboutConditions(InputFromTextBox);
+            //LearningAboutLoops();
+          
+
+        }
+        private void LearningAboutConditions(string fromGUI)
+        {
+            int localInt = Convert.ToInt32(fromGUI);
+
+            if (localInt > 10)
+            {         
+                MessageBox.Show("Talet är för stort");
+            }
+            else
+            {
+                MessageBox.Show("Talet är inom ramen");
+            } 
+            
+            if (localInt > 6 && localInt < 8)
+            {
+                MessageBox.Show("Talet är 7");
+            }
+            else
+            {
+                MessageBox.Show("Talet inte 7");
+            }
+
+            //-----------------------------------------------------------------------
+
+
+            switch (localInt)
+            {
+                case 1:
+                    MessageBox.Show("Du matade in talet 1");
+                    break;
+                case 2: 
+                    MessageBox.Show("Du matade in talet 2!");
+                    break;
+                default:
+                    MessageBox.Show("Allt annat");
+                    break;
+            }
+        }
+        private void LearningAboutLoops()
+        {
+            string[] names = { "Dede", "Dodo", "Dada", "Paul" };
+
+            for (int i = 0; i <names.Length; i++)
+            {
+                MessageBox.Show(names[i]);
+            }
+
+            foreach (string name in names)
+            {
+                MessageBox.Show(name);
+            }
+        }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WhatIsErrors(string inInt)
+        {
+            try
+            {
+                int myInt = Convert.ToInt32(inInt);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Hey what's happening..");
+                MessageBox.Show("Förklaring följer" + e);
+            }
+            finally
+            {
+                MessageBox.Show("Lungt det löser sig");
+            }
+        }
+        private void MoreErrors(string fromGUI)
+        {
+            string[] names = { "Dede", "Dodo" };
+            try
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    MessageBox.Show(names[i]);
+                }
+                int myInt = Convert.ToInt32(fromGUI);
+            }
+            catch (System.IndexOutOfRangeException ex)
+            {
+                MessageBox.Show("Right error.." + ex);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Hey what's happening..");
+                MessageBox.Show("Förklaring följer" + e);
+            }
+           
+            finally
+            {
+                MessageBox.Show("Lungt det löser sig");
+            }
+        }
+        private void ReadFile(int index)
+        {
+            // To run this code, substitute a valid path from your local machine
+            string path = @"c:\tester\test.txt";
+            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            char[] buffer = new char[10];
+            try
+            {
+                file.ReadBlock(buffer, index, buffer.Length);
+                string myText = "Hej titta på mig, jag är en mening";
+                int myInt = Convert.ToInt32(myText);
+            }
+            catch (System.IO.IOException e)
+            {
+                Console.WriteLine("Error reading from {0}. Message = {1}", path, e.Message);
+            }
+
+            finally
+            {
+                if (file != null)
+                {
+                    file.Close();
+                }
+            }
+            // Do something with buffer...
+        }
+    }
+}
